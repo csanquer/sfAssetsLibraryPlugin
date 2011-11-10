@@ -16,6 +16,7 @@
 <fieldset id="sf_fieldset_meta" class="">
   <h2><?php echo __('Metadata', null, 'sfAsset') ?></h2>
   <?php echo $form ?>
+  <?php echo $form->renderHiddenFields() ?>
 </fieldset>
 
 <?php include_partial('edit_actions', array('sf_asset' => $sf_asset)) ?>
