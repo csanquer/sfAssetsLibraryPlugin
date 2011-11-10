@@ -158,11 +158,11 @@ class sfAssetsLibraryTools
       $old = umask(0);
       if (!is_dir($absCurrentDir))
       {
-        mkdir($absCurrentDir, 0770);
+        mkdir($absCurrentDir, 0775);
       }
       if (!is_dir($absThumbDir))
       {
-        mkdir($absThumbDir, 0770);
+        mkdir($absThumbDir, 0775);
       }
       umask($old);
     }
