@@ -1,0 +1,4 @@
+all:
+  sfAssetsLibrary:
+    chmod_dir: 0755
+    chmod_file: 0644

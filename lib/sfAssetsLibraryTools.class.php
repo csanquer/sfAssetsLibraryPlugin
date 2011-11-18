@@ -158,11 +158,11 @@ class sfAssetsLibraryTools
       $old = umask(0);
       if (!is_dir($absCurrentDir))
       {
-        mkdir($absCurrentDir, 0775);
+        mkdir($absCurrentDir, sfConfig::get('app_sfAssetsLibrary_chmod_dir', 0755));
       }
       if (!is_dir($absThumbDir))
       {
-        mkdir($absThumbDir, 0775);
+        mkdir($absThumbDir, sfConfig::get('app_sfAssetsLibrary_chmod_dir', 0755));
       }
       umask($old);
     }

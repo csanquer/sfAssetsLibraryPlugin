@@ -160,6 +160,8 @@ class PluginsfAsset extends BasesfAsset
       throw new sfAssetException('A problem occurred during while saving "%file%"', array('%file%' =>  $this->getFullPath()));
     }
 
+    chmod($this->getFullPath(), sfConfig::get('app_sfAssetsLibrary_chmod_file', 0644));
+    
     if ($this->supportsThumbnails())
     {
       sfAssetsLibraryTools::createThumbnails($this->getFolderPath(), $this->getFilename(), $this->isPdf());
