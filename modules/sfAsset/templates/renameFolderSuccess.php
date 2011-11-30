@@ -8,7 +8,7 @@
   <fieldset id="sf_fieldset_none">
 
     <?php echo $form ?>
-
+    <?php echo $form->renderHiddenFields(false) ?>
   </fieldset>
 
   <?php include_partial('edit_actions') ?>

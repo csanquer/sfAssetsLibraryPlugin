@@ -7,7 +7,7 @@
   <form action="<?php echo url_for('@sf_asset_library_search') ?>" method="get" id="sf_asset_search">
 
     <?php echo $form ?>
-
+    <?php echo $form->renderHiddenFields(false) ?>
     <ul class="sf_admin_actions">
       <li>
         <input type="submit" value="<?php echo __('Search', null, 'sfAsset') ?>" name="search" class="sf_admin_action_filter" />
