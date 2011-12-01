@@ -156,13 +156,16 @@ class sfAssetsLibraryTools
     try
     {
       $old = umask(0);
+      $dirMode =  sfConfig::get('app_sfAssetsLibrary_chmod_dir', 0755);
       if (!is_dir($absCurrentDir))
       {
-        mkdir($absCurrentDir, sfConfig::get('app_sfAssetsLibrary_chmod_dir', 0755));
+        mkdir($absCurrentDir, $dirMode);
+        chmod($absCurrentDir, $dirMode);
       }
       if (!is_dir($absThumbDir))
       {
-        mkdir($absThumbDir, sfConfig::get('app_sfAssetsLibrary_chmod_dir', 0755));
+        mkdir($absThumbDir, $dirMode);
+        chmod($absThumbDir, $dirMode);
       }
       umask($old);
     }
@@ -352,6 +355,7 @@ class sfAssetsLibraryTools
       }
         $thumbnail->loadFile($source);
         $thumbnail->save($dest, $mime);
+        chmod($dest, sfConfig::get('app_sfAssetsLibrary_chmod_file', 0644));
 
         return true;
       }
@@ -389,6 +393,7 @@ class sfAssetsLibraryTools
       }
       $thumbnail->loadFile($source);
       $thumbnail->save($dest, $mime, true);
+      chmod($dest, sfConfig::get('app_sfAssetsLibrary_chmod_file', 0644));
 
         return true;
     }
