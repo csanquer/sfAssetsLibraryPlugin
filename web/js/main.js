@@ -14,22 +14,28 @@ sfAssetsLibrary_Engine.prototype = {
       var url = asset_url.firstChild.data
       this.url = url;
     }
-    var asset_input = document.getElementById('sf_asset_input_image');
-    if (asset_input)
+    var asset_inputs = document.getElementsByClassName('sf_asset_inputs_image');
+    
+    for (var i = 0; i < asset_inputs.length; i++) 
     {
-      eval('var rel = ' + asset_input.getAttribute('rel'));
-      var fname = asset_input.previousSibling.form.name;
-      sfAssetsLibrary.addEvent(asset_input, 'click', function(e) {
-        sfAssetsLibrary.openWindow({
-          form_name: fname,
-          field_name: rel.name,
-          type: rel.type,
-          url: rel.url,
-          scrollbars: 'yes'
-        });
-        sfAssetsLibrary.prevDef(e);
-        sfAssetsLibrary.stopProp(e);
-      }, false);
+        var asset_input = asset_inputs[i];
+        console.debug(asset_input);
+        if (asset_input)
+        {
+          var fname = asset_input.previousSibling.form.name;
+          sfAssetsLibrary.addEvent(asset_input, 'click', function(e) {
+            eval('var rel = ' + this.getAttribute('rel'));
+            sfAssetsLibrary.openWindow({
+              form_name: fname,
+              field_name: rel.name,
+              type: rel.type,
+              url: rel.url,
+              scrollbars: 'yes'
+            });
+            sfAssetsLibrary.prevDef(e);
+            sfAssetsLibrary.stopProp(e);
+          }, false);
+        }
     }
   },
 
