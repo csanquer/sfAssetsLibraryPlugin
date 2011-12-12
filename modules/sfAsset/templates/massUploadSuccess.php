@@ -10,7 +10,7 @@
   <form action="<?php echo url_for('@sf_asset_library_mass_upload') ?>" method="post" enctype="multipart/form-data">
 
     <?php echo $form->renderGlobalErrors() ?>
-
+    <?php echo $form->renderHiddenFields(false) ?>
     <fieldset>
     <?php echo $form ?>
     </fieldset>

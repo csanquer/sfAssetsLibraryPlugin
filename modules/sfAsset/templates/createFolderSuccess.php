@@ -7,6 +7,7 @@
 <form action="<?php echo url_for('@sf_asset_library_create_folder') ?>" method="post">
   <fieldset>
     <?php echo $form ?>
+    <?php echo $form->renderHiddenFields(false) ?>
   </fieldset>
 
   <?php include_partial('edit_actions') ?>

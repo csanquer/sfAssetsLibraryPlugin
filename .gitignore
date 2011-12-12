@@ -1,5 +1,4 @@
-lib/filter/base/
-lib/form/base/
-lib/model/map/
-lib/model/om/
-
+lib/model/om/*
+lib/model/map/*
+lib/form/base/*
+lib/filter/base/*
