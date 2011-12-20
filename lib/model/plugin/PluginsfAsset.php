@@ -252,9 +252,9 @@ class PluginsfAsset extends BasesfAsset
   /**
    * check if a thumbnail exists, if not it recreate it
    * 
-   * @param string $thumbnail_type 
+   * @param string $thumbnailType 
    */
-  public function checkThumbnail($thumbnail_type)
+  public function checkThumbnail($thumbnailType)
   {
       sfAssetsLibraryTools::checkThumbnail($this->getFolderPath(), $this->getFilename(), $thumbnailType, $this->isPdf());
   }
