@@ -287,6 +287,44 @@ class sfAssetsLibraryTools
   }
 
   /**
+   *
+   * check if a thumbnail for image assets exists , if not it recreate it
+   * 
+   * @param string $folder
+   * @param string $filename
+   * @param string $thumbnailType
+   * @param boolean $pdf default = false
+   */
+  public static function checkThumbnail($folder, $filename, $thumbnailType, $pdf = false)
+  {
+      $thumbnailPath = self::getThumbnailPath($folder, $filename, $thumbnailType);
+      if (!file_exists($thumbnailPath))
+      {
+        $source = self::getThumbnailPath($folder, $filename, 'full');
+        $thumbnailSettings = sfConfig::get('app_sfAssetsLibrary_thumbnails', array(
+          'small' => array('width' => 84, 'height' => 84, 'shave' => true),
+          'large' => array('width' => 194, 'height' => 152)
+        ));
+        
+        if (isset($thumbnailSettings[$thumbnailType]))
+        {
+          $params = $thumbnailSettings[$thumbnailType];
+          $width  = $params['width'];
+          $height = $params['height'];
+          $shave  = isset($params['shave']) ? $params['shave'] : false;
+          if ($pdf)
+          {
+            self::createPdfThumbnail($source, $thumbnailPath, $width, $height, $shave);
+          }
+          else
+          {
+            self::createThumbnail($source, $thumbnailPath, $width, $height, $shave);
+          }
+        }
+      }
+  }
+  
+  /**
    * Create the thumbnails for image assets
    * The numbe and size of thumbnails can be configured in the app.yml
    * The configuration accepts various formats:
@@ -315,7 +353,7 @@ class sfAssetsLibraryTools
       }
       else
       {
-      self::createThumbnail($source, self::getThumbnailPath($folder, $filename, $key), $width, $height, $shave);
+        self::createThumbnail($source, self::getThumbnailPath($folder, $filename, $key), $width, $height, $shave);
       }
     }
   }

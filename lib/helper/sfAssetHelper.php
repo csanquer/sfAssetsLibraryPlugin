@@ -26,6 +26,7 @@ function asset_image_tag($asset, $thumbType = 'full', $options = array(), $relat
 
   if ($asset->isImage() || $asset->isPdf())
   {
+    $asset->checkThumbnail($thumbType);
     $src = $asset->getUrl($thumbType, $relativePath, $asset->isPdf());
     if ($asset->isPdf() && !is_readable(sfConfig::get('sf_web_dir') . $src))
     {
