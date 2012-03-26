@@ -440,7 +440,7 @@ class PluginsfAssetFolder extends BasesfAssetFolderNestedSet
     {
       case 'date':
         $dirs = sfAssetFolderPeer::sortByDate($dirs);
-        $c->addDescendingOrderByColumn(sfAssetPeer::CREATED_AT);
+        $c->addAscendingOrderByColumn(sfAssetPeer::CREATED_AT);
         break;
       default:
         $dirs = sfAssetFolderPeer::sortByName($dirs);
