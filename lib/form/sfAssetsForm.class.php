@@ -47,7 +47,7 @@ class sfAssetsForm extends BasesfAssetForm
         $asset->setDescription($file->getOriginalName());
         $asset->setAuthor($this->getOption('author'));
         $asset->setFilename($file->getOriginalName());
-        $asset->create($file->getTempName());
+        $asset->create($file->getTempName(), true, true, true);
         $asset->save();
         $this->assets[] = $asset;
       }

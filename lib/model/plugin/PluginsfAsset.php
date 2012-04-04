@@ -121,9 +121,10 @@ class PluginsfAsset extends BasesfAsset
    *
    * @param string  $assetPath path to the asset original file
    * @param boolean $move      do move or just copy ?
-   * @param boolean $move      check duplicate?
+   * @param boolean $checkDuplicate      check duplicate?
+   * @param boolean $onlySaveConfigs if true create thumbnail only if the thumbnail configuration has a save option set to true
    */
-  public function create($assetPath, $move = true, $checkDuplicate = true)
+  public function create($assetPath, $move = true, $checkDuplicate = true, $onlySaveConfigs = false)
   {
     if (!is_file($assetPath))
     {
@@ -164,7 +165,7 @@ class PluginsfAsset extends BasesfAsset
     
     if ($this->supportsThumbnails())
     {
-      sfAssetsLibraryTools::createThumbnails($this->getFolderPath(), $this->getFilename(), $this->isPdf());
+      sfAssetsLibraryTools::createThumbnails($this->getFolderPath(), $this->getFilename(), $this->isPdf(), $onlySaveConfigs);
     }
   }
 

@@ -155,7 +155,7 @@ class PluginsfAssetFolder extends BasesfAssetFolderNestedSet
         // File exists, asset does not exist: create asset
         $sfAsset = new sfAsset();
         $sfAsset->setFolderId($this->getId());
-        $sfAsset->create($file, false);
+        $sfAsset->create($file, false, true, true);
         $sfAsset->save();
         if ($verbose)
         {

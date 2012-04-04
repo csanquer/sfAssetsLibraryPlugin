@@ -334,26 +334,31 @@ class sfAssetsLibraryTools
    * @param string $folder
    * @param string $filename
    * @param boolean $pdf
+   * @param boolean $onlySaveConfigs if true create thumbnail only if the thumbnail configuration has a save option set to true
    */
-  public static function createThumbnails($folder, $filename, $pdf = false)
+  public static function createThumbnails($folder, $filename, $pdf = false, $onlySaveConfigs = false)
   {
     $source = self::getThumbnailPath($folder, $filename, 'full');
     $thumbnailSettings = sfConfig::get('app_sfAssetsLibrary_thumbnails', array(
-      'small' => array('width' => 84, 'height' => 84, 'shave' => true),
-      'large' => array('width' => 194, 'height' => 152)
+      'small' => array('width' => 84, 'height' => 84, 'shave' => true, 'save' => 'true'),
+      'large' => array('width' => 194, 'height' => 152, 'save' => 'true')
     ));
     foreach ($thumbnailSettings as $key => $params)
     {
       $width  = $params['width'];
       $height = $params['height'];
       $shave  = isset($params['shave']) ? $params['shave'] : false;
-      if ($pdf)
+      $onSave  = isset($params['save']) ? $params['save'] : false;
+      if (!$onlySaveConfigs || $onlySaveConfigs && $onSave)
       {
-        self::createPdfThumbnail($source, self::getThumbnailPath($folder, $filename, $key), $width, $height, $shave);
-      }
-      else
-      {
-        self::createThumbnail($source, self::getThumbnailPath($folder, $filename, $key), $width, $height, $shave);
+        if ($pdf)
+        {
+            self::createPdfThumbnail($source, self::getThumbnailPath($folder, $filename, $key), $width, $height, $shave);
+        }
+        else
+        {
+            self::createThumbnail($source, self::getThumbnailPath($folder, $filename, $key), $width, $height, $shave);
+        }
       }
     }
   }

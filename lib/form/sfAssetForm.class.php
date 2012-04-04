@@ -72,7 +72,7 @@ class sfAssetForm extends BasesfAssetForm
       {
         $object->setDescription($file->getOriginalName());
       }
-      $object->create($file->getTempName());
+      $object->create($file->getTempName(), true, true, true);
     }
 
     return $object;
